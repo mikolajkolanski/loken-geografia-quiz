@@ -1,120 +1,134 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Geografia Wyspy</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+
 </head>
+
 <body>
-    <div id="row">
-        <button id="startButton" onclick="start()">Start</button>
-        <h1 id="clock">00:00</h1>
-        <h1 id="score">Wynik</h1>
-        <h1 id="header">Kliknij Start</h1>
+    <nav>
+        <button id="startButton" onclick="start()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">00:00</span>
+        </div>
+
+    </nav>
+    <div id="header">
+        ...
     </div>
     <div id="imageContainer">
         <img src="https://d-maps.com/m/world/centreeurope/centreeurope05.svg" alt="Poczekaj aż się załaduje" />
         <div id="points">
-            <button x="67" y="45" name="Malediwy">
-            <button x="69.5" y="45" name="Cejlon">
-            <button x="73" y="41" name="Andamany i Nikobary">
-            <button x="83" y="47" name="Archipelag Malajski">
-            <button x="76" y="50" name="Sumatra">
-            <button x="80" y="50" name="Borneo">
-            <button x="79" y="55" name="Jawa">
-            <button x="82.5" y="51.5" name="Celebes">
-            <button x="81.5" y="39" name="Luzon">
-            <button x="83.5" y="45" name="Mindanao">
-            <button x="81.5" y="41" name="Mindoro">
-            <button x="77.5" y="37" name="Hajnan">
-            <button x="80.5" y="34" name="Tajwan">
-            <button x="81" y="28" name="Kiusiu">
-            <button x="81.7" y="27" name="Sikoku">
-            <button x="82" y="24.5" name="Honsiu">
-            <button x="81" y="21" name="Hokkaido">
-            <button x="81.5" y="18" name="Kuryle">
-            <button x="78" y="17" name="Sachalin">
-            <button x="68" y="6.5" name="Wyspy Nowosyberysjkie">
-            <button x="60" y="6.5" name="Ziemia Północna">
-            <button x="52" y="25.5" name="Półwysep Azja Mniejsza">
-            <button x="58" y="36" name="Półwysep Arabski">
-            <button x="53" y="30.5" name="Półwysep Synaj">
-            <button x="68" y="39" name="Półwysep Indyjski">
-            <button x="76" y="39" name="Półwysep Indochiński">
-            <button x="76" y="46" name="Półwysep Malajski">
-            <button x="79" y="25.5" name="Półwysep Koreański">
-            <button x="79" y="13" name="Półwysep Kamczatka">
-            <button x="62" y="8" name="Półwysep Tajmyr">
-            <button x="56.5" y="9" name="Półwysep Jamał">
+            <button x="67" y="45" name="Malediwy" />
+            <button x="69.5" y="45" name="Cejlon" />
+            <button x="73" y="41" name="Andamany i Nikobary" />
+            <button x="83" y="47" name="Archipelag Malajski" />
+            <button x="76" y="50" name="Sumatra" />
+            <button x="80" y="50" name="Borneo" />
+            <button x="79" y="55" name="Jawa" />
+            <button x="82.5" y="51.5" name="Celebes" />
+            <button x="81.5" y="39" name="Luzon" />
+            <button x="83.5" y="45" name="Mindanao" />
+            <button x="81.5" y="41" name="Mindoro" />
+            <button x="77.5" y="37" name="Hajnan" />
+            <button x="80.5" y="34" name="Tajwan" />
+            <button x="81" y="28" name="Kiusiu" />
+            <button x="81.7" y="27" name="Sikoku" />
+            <button x="82" y="24.5" name="Honsiu" />
+            <button x="81" y="21" name="Hokkaido" />
+            <button x="81.5" y="18" name="Kuryle" />
+            <button x="78" y="17" name="Sachalin" />
+            <button x="68" y="6.5" name="Wyspy Nowosyberysjkie" />
+            <button x="60" y="6.5" name="Ziemia Północna" />
+            <button x="52" y="25.5" name="Półwysep Azja Mniejsza" />
+            <button x="58" y="36" name="Półwysep Arabski" />
+            <button x="53" y="30.5" name="Półwysep Synaj" />
+            <button x="68" y="39" name="Półwysep Indyjski" />
+            <button x="76" y="39" name="Półwysep Indochiński" />
+            <button x="76" y="46" name="Półwysep Malajski" />
+            <button x="79" y="25.5" name="Półwysep Koreański" />
+            <button x="79" y="13" name="Półwysep Kamczatka" />
+            <button x="62" y="8" name="Półwysep Tajmyr" />
+            <button x="56.5" y="9" name="Półwysep Jamał" />
 
-            <button x="46" y="8" name="Svalbard">
-            <button x="54" y="9" name="Nowa Ziemia">
-            <button x="38.5" y="12" name="Nowa Ziemia">
-            <button x="40.5" y="18" name="Irlandia">
-            <button x="42" y="18" name="Wielka Brytania">
-            <button x="43.5" y="25" name="Baleary">
-            <button x="45" y="25" name="Sardynia">
-            <button x="45" y="24" name="Korsyka">
-            <button x="46.5" y="27" name="Korsyka">
-            <button x="46.7" y="28" name="Malta">
-            <button x="50" y="27.5" name="Kreta">
-            <button x="41.5" y="25" name="Półwysep Iberyjski">
-            <button x="42" y="20.5" name="Półwysep Bretoński">
-            <button x="46.5" y="24" name="Półwysep Apeniński">
-            <button x="49" y="24" name="Półwysep Bałkański">
-            <button x="49" y="26.5" name="Półwysep Peloponezki">
-            <button x="52" y="22" name="Półwysep Krymski">
-            <button x="46" y="13" name="Półwysep Skandynawski">
-            <button x="50.5" y="11.5" name="Półwysep Kolski">
-            <button x="45" y="17" name="Półwysep Jutlandzki">
+            <button x="46" y="8" name="Svalbard" />
+            <button x="54" y="9" name="Nowa Ziemia" />
+            <button x="38.5" y="12" name="Nowa Ziemia" />
+            <button x="40.5" y="18" name="Irlandia" />
+            <button x="42" y="18" name="Wielka Brytania" />
+            <button x="43.5" y="25" name="Baleary" />
+            <button x="45" y="25" name="Sardynia" />
+            <button x="45" y="24" name="Korsyka" />
+            <button x="46.5" y="27" name="Korsyka" />
+            <button x="46.7" y="28" name="Malta" />
+            <button x="50" y="27.5" name="Kreta" />
+            <button x="41.5" y="25" name="Półwysep Iberyjski" />
+            <button x="42" y="20.5" name="Półwysep Bretoński" />
+            <button x="46.5" y="24" name="Półwysep Apeniński" />
+            <button x="49" y="24" name="Półwysep Bałkański" />
+            <button x="49" y="26.5" name="Półwysep Peloponezki" />
+            <button x="52" y="22" name="Półwysep Krymski" />
+            <button x="46" y="13" name="Półwysep Skandynawski" />
+            <button x="50.5" y="11.5" name="Półwysep Kolski" />
+            <button x="45" y="17" name="Półwysep Jutlandzki" />
 
-            <button x="60.5" y="42" name="Sokotra">
-            <button x="57" y="58" name="Komory">
-            <button x="38" y="32" name="Wyspy Kanaryjskie">
-            <button x="38" y="30" name="Madera">
-            <button x="58" y="45" name="Półwysep Somalijski">
-            <button x="49.5" y="71" name="Przylądek Igielny">
-            <button x="48.5" y="71" name="Przylądek Dobrej Nadziei">
+            <button x="60.5" y="42" name="Sokotra" />
+            <button x="57" y="58" name="Komory" />
+            <button x="38" y="32" name="Wyspy Kanaryjskie" />
+            <button x="38" y="30" name="Madera" />
+            <button x="58" y="45" name="Półwysep Somalijski" />
+            <button x="49.5" y="71" name="Przylądek Igielny" />
+            <button x="48.5" y="71" name="Przylądek Dobrej Nadziei" />
 
-            <button x="5" y="13.5" name="Aleuty">
-            <button x="35" y="9" name="Grenlandia">
-            <button x="21" y="8.5" name="Wiktorii">
-            <button x="25" y="9" name="Ziemia Baffina">
-            <button x="28" y="20" name="Nowa Funlandia">
-            <button x="17.5" y="35" name="Kuba">
-            <button x="19.5" y="37" name="Haiti">
-            <button x="17.5" y="37.5" name="Jamajka">
-            <button x="22.5" y="41" name="Małe Antyle">
-            <button x="18.5" y="33" name="Bahamy">
-            <button x="24" y="27" name="Bermudy">
-            <button x="12" y="9" name="Półwysep Alaska">
-            <button x="26" y="16" name="Półwysep Labrador">
-            <button x="25" y="22" name="Półwysep Nowa Szkocja">
-            <button x="17.5" y="32" name="Półwysep Floryda">
-            <button x="8" y="32" name="Półwysep Kalifornijski">
-            <button x="14" y="37" name="Półwysep Jukatan">
+            <button x="5" y="13.5" name="Aleuty" />
+            <button x="35" y="9" name="Grenlandia" />
+            <button x="21" y="8.5" name="Wiktorii" />
+            <button x="25" y="9" name="Ziemia Baffina" />
+            <button x="28" y="20" name="Nowa Funlandia" />
+            <button x="17.5" y="35" name="Kuba" />
+            <button x="19.5" y="37" name="Haiti" />
+            <button x="17.5" y="37.5" name="Jamajka" />
+            <button x="22.5" y="41" name="Małe Antyle" />
+            <button x="18.5" y="33" name="Bahamy" />
+            <button x="24" y="27" name="Bermudy" />
+            <button x="12" y="9" name="Półwysep Alaska" />
+            <button x="26" y="16" name="Półwysep Labrador" />
+            <button x="25" y="22" name="Półwysep Nowa Szkocja" />
+            <button x="17.5" y="32" name="Półwysep Floryda" />
+            <button x="8" y="32" name="Półwysep Kalifornijski" />
+            <button x="14" y="37" name="Półwysep Jukatan" />
 
-            <button x="89" y="54" name="Nowa Gwinea">
-            <button x="91" y="77" name="Nowa Zelandia - Wyspa Północna">
-            <button x="87" y="80" name="Nowa Zelandia - Wyspa Południowa">
-            <button x="82.5" y="78.5" name="Tasmania">
-            <button x="90" y="47" name="Karoliny">
-            <button x="94" y="43" name="Wyspy Marshalla">
-            <button x="93.5" y="55.5" name="Wyspy Salomona">
-            <button x="94.4" y="64.5" name="Nowe Hebrydy">
-            <button x="95.2" y="61" name="Fidżi">
-            <button x="93.6" y="65.5" name="Nowa Kaledonia">
-            <button x="93.6" y="65.5" name="Hawaje">
-            <button x="95" y="30" name="Hawaje">
+            <button x="89" y="54" name="Nowa Gwinea" />
+            <button x="91" y="77" name="Nowa Zelandia - Wyspa Północna" />
+            <button x="87" y="80" name="Nowa Zelandia - Wyspa Południowa" />
+            <button x="82.5" y="78.5" name="Tasmania" />
+            <button x="90" y="47" name="Karoliny" />
+            <button x="94" y="43" name="Wyspy Marshalla" />
+            <button x="93.5" y="55.5" name="Wyspy Salomona" />
+            <button x="94.4" y="64.5" name="Nowe Hebrydy" />
+            <button x="95.2" y="61" name="Fidżi" />
+            <button x="93.6" y="67" name="Nowa Kaledonia" />
+            <button x="93.6" y="65.5" name="Hawaje" />
+            <button x="95" y="30" name="Hawaje" />
 
-            <button x="22" y="43" name="Trynidad">
-            <button x="12.5" y="50" name="Galapagos">
-            <button x="27.5" y="81" name="Falklandy">
-            <button x="26" y="82.5" name="Ziemia Ognista">
-            <button x="33.5" y="82.5" name="Georgia Południowa i Sandwich Południowy">
-            <button x="27" y="86" name="Szetlandy Południowe">
+            <button x="22" y="43" name="Trynidad" />
+            <button x="12.5" y="50" name="Galapagos" />
+            <button x="27.5" y="81" name="Falklandy" />
+            <button x="26" y="82.5" name="Ziemia Ognista" />
+            <button x="33.5" y="82.5" name="Georgia Południowa i Sandwich Południowy" />
+            <button x="27" y="86" name="Szetlandy Południowe" />
+        </div>
     </div>
 </body>
-</html>
 <script src="script.js"></script>
+
+</html>
