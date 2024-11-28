@@ -28,7 +28,7 @@ var buttonPressed = function () {
     return;
   }
 
-  errors += 1;
+  if (errors < 2) errors += 1;
   if (errors > 1) {
     place.classList.add("hint");
   }
