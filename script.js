@@ -1,8 +1,8 @@
-var elements = document.getElementById("points").children;
-var header = document.getElementById("header");
-var score_elem = document.getElementById("score");
-var timer_elem = document.getElementById("clock");
-var start_butt_elem = document.getElementById("startButton");
+const elements = document.getElementById("points").children;
+const header = document.getElementById("header");
+const score_elem = document.getElementById("score");
+const timer_elem = document.getElementById("clock");
+const start_butt_elem = document.getElementById("startButton");
 var start_places = [];
 var places;
 var place;
@@ -10,38 +10,46 @@ var score;
 var errors;
 var start_timer;
 
-var buttonPressed = function () {
+var pointPressed = function () {
   var name = this.getAttribute("name");
 
-  if (name == place.getAttribute("name")) {
-    if (place.classList.contains("hint")) {
-      place.classList.remove("hint");
-      this.classList.add("red");
-    } else if (errors == 1) {
-      this.classList.add("orange");
-    } else {
-      this.classList.add("correct");
+
+  if (name != place.getAttribute("name")) {
+    cursorTextPoint(this, name, false);
+    if (errors < 2) errors += 1;
+    if (errors > 1) {
+      place.classList.add("hint");
     }
-    score += 3 - errors;
-    updateScore();
-    next();
     return;
   }
 
-  if (errors < 2) errors += 1;
-  if (errors > 1) {
-    place.classList.add("hint");
+  // Correct answer
+  cursorTextPoint(this, name, true);
+
+  if (place.classList.contains("hint")) {
+    place.classList.remove("hint");
+    this.classList.add("red");
+  } else if (errors == 1) {
+    this.classList.add("orange");
+  } else {
+    this.classList.add("correct");
   }
+  score += 3 - errors;
+  updateScore();
+  next();
+  return;
 };
 
-for (var i = 0; i < elements.length; i++) {
-  if (elements[i].tagName != "BUTTON") continue;
-  start_places.push(elements[i]);
-  elements[i].style.left = elements[i].getAttribute("x") + "%";
-  elements[i].style.top = elements[i].getAttribute("y") + "%";
-  elements[i].style.width = elements[i].getAttribute("size") + "rem";
-  elements[i].addEventListener("mousedown", buttonPressed, false);
-}
+function cursorTextPoint(point, text, correct) {
+  const p = point.getBoundingClientRect();
+  const elem = document.createElement('div');
+  if (correct) elem.className = 'cursorText correct';
+  else         elem.className = 'cursorText red';
+  elem.textContent = text;
+  elem.style.left = `${p.left+16}px`;
+  elem.style.top = `${p.top}px`;
+  document.body.appendChild(elem);
+} 
 
 function start() {
   start_butt_elem.remove();
@@ -86,4 +94,13 @@ function next() {
   console.log(places);
 
   header.innerText = "Znajdź '" + place.getAttribute("name") + "'";
+}
+
+for (var i = 0; i < elements.length; i++) {
+  if (elements[i].tagName != "BUTTON") continue;
+  start_places.push(elements[i]);
+  elements[i].style.left = elements[i].getAttribute("x") + "%";
+  elements[i].style.top = elements[i].getAttribute("y") + "%";
+  elements[i].style.width = elements[i].getAttribute("size") + "rem";
+  elements[i].addEventListener("mousedown", pointPressed, false);
 }

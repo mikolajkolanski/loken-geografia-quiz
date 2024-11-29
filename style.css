@@ -111,3 +111,28 @@ nav {
   background-color: red;
   pointer-events: none;
 }
+
+.cursorText {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    pointer-events: none;
+    animation: fadeOut 1.5s forwards;
+
+    border-radius: 0.3rem;
+    padding: 0 0.5rem 0 0.5rem;
+}
+
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
