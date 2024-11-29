@@ -11,8 +11,8 @@ var errors;
 var start_timer;
 
 // Audio
-const audio_correct = new Audio('correct.mp3');
-const audio_wrong = new Audio('error.mp3');
+const audio_correct = new Audio('assets/correct.mp3');
+const audio_wrong = new Audio('assets/error.mp3');
 
 var pointPressed = function () {
   var name = this.getAttribute("name");
