@@ -10,11 +10,16 @@ var score;
 var errors;
 var start_timer;
 
+// Audio
+const audio_correct = new Audio('correct.mp3');
+const audio_wrong = new Audio('error.mp3');
+
 var pointPressed = function () {
   var name = this.getAttribute("name");
 
 
   if (name != place.getAttribute("name")) {
+    audio_wrong.cloneNode(true).play();
     cursorTextPoint(this, name, false);
     if (errors < 2) errors += 1;
     if (errors > 1) {
@@ -25,6 +30,7 @@ var pointPressed = function () {
 
   // Correct answer
   cursorTextPoint(this, name, true);
+  audio_correct.cloneNode(true).play();
 
   if (place.classList.contains("hint")) {
     place.classList.remove("hint");
