@@ -9,6 +9,7 @@ var place;
 var score;
 var errors;
 var start_timer;
+var started = false;
 
 // Audio
 const audio_correct = new Audio('assets/correct.mp3');
@@ -58,7 +59,12 @@ function cursorTextPoint(point, text, correct) {
 } 
 
 function start() {
-  start_butt_elem.remove();
+  start_butt_elem.innerText = 'Reset';
+
+  start_places.forEach((p) => {
+    p.className = '';
+  })
+
   places = start_places.slice();
   places.sort(() => 0.5 - Math.random());
   console.log(places);
@@ -75,7 +81,19 @@ function start() {
       ((Math.floor(delta / 10) % 100) + "").padStart(2, "0");
   }, 10);
 
+  updateScore();
   next();
+}
+
+function reset() {
+  start_butt_elem.innerText = 'Start';
+  end();
+}
+
+function start_or_reset() {
+  if (!started) start()
+  else reset()
+  started = !started;
 }
 
 function updateScore() {
