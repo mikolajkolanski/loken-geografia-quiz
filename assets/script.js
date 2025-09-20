@@ -120,6 +120,7 @@ function next() {
   header.innerText = "Znajdź '" + place.getAttribute("name") + "'";
 }
 
+
 for (var i = 0; i < elements.length; i++) {
   if (elements[i].tagName != "BUTTON") continue;
   start_places.push(elements[i]);
@@ -131,7 +132,11 @@ for (var i = 0; i < elements.length; i++) {
 
     [x, y] = calcXY(lon, lat)
   }
+  let dx = parseFloat(elements[i].getAttribute("dx"));
+  let dy = parseFloat(elements[i].getAttribute("dy"));
 
+  if (!isNaN(dx)) x += dx;
+  if (!isNaN(dy)) y += dy;
   elements[i].style.left = x + "%";
   elements[i].style.top = y + "%";
   elements[i].style.width = elements[i].getAttribute("size") + "rem";
@@ -139,39 +144,23 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 function calcXY(lon, lat) {
-    const lon0 = 35;       // Europe center longitude
-    const hScale = 1.21;  // horizontal stretch
-    const vScale = 1.21;  // vertical stretch
+  // Clamp latitude to [-90, 90]
+  lat = Math.max(-90, Math.min(90, lat));
+  
+  // Normalize longitude to [-180, 180]
+  lon = ((lon + 180) % 360 + 360) % 360 - 180;
 
-    const phi = lat * Math.PI / 180;
-    const lambda = lon * Math.PI / 180;
-
-    // Solve theta iteratively
-    let theta = phi; // initial guess
-    for (let i = 0; i < 10; i++) {
-        const f = theta + Math.sin(theta) * Math.cos(theta) + 2 * Math.sin(theta) - Math.PI * Math.sin(phi);
-        const fPrime = 1 + Math.cos(2*theta) + 2*Math.cos(theta);
-        theta = theta - f / fPrime;
-    }
-
-    // Eckert IV constants
-    const xConst = 2 / Math.sqrt(4 * Math.PI + Math.PI * Math.PI) * hScale;
-    const yConst = 2 * Math.sqrt(Math.PI / (4 + Math.PI)) * vScale;
-
-    let x = xConst * (lambda - lon0 * Math.PI / 180) * (1 + Math.cos(theta));
-    let y = yConst * Math.sin(theta);
-
-    // Normalize to 0-100%
-    let xPercent = (x + Math.PI) / (2 * Math.PI) * 100 * hScale - 6.5;
-    let  yPercent = (Math.PI/2 - y) / (Math.PI) * 100 * vScale - 3;
+  // Convert to %
+  const x = (lon + 180) / 360 * 100;   // 0 → 100
+  const y = (90 - lat) / 180 * 100-1;    // 0 (north) → 100 (south)
 
   // x = 3
-  // x = 96
-  xPercent = xPercent*(0.96-0.03)+3
-  
-  // y = 4
-  // y = 84.5
-  yPercent = yPercent*(0.845-0.04)+4
+  // x = 94
+  // xPercent = x*(0.94-0.03)+3
+  xPercent = x 
+  // y = 0
+  // y = 74
+  yPercent = y*(0.74-0)+0
 
   return [xPercent, yPercent]
 }
