@@ -123,8 +123,55 @@ function next() {
 for (var i = 0; i < elements.length; i++) {
   if (elements[i].tagName != "BUTTON") continue;
   start_places.push(elements[i]);
-  elements[i].style.left = elements[i].getAttribute("x") + "%";
-  elements[i].style.top = elements[i].getAttribute("y") + "%";
+  let x = parseFloat(elements[i].getAttribute("x"));
+  let y = parseFloat(elements[i].getAttribute("y"));
+  if (isNaN(x) || isNaN(y)) {
+    let lon = parseFloat(elements[i].getAttribute("long"));
+    let lat = parseFloat(elements[i].getAttribute("lat"));
+
+    [x, y] = calcXY(lon, lat)
+  }
+
+  elements[i].style.left = x + "%";
+  elements[i].style.top = y + "%";
   elements[i].style.width = elements[i].getAttribute("size") + "rem";
   elements[i].addEventListener("mousedown", pointPressed, false);
+}
+
+function calcXY(lon, lat) {
+    const lon0 = 35;       // Europe center longitude
+    const hScale = 1.21;  // horizontal stretch
+    const vScale = 1.21;  // vertical stretch
+
+    const phi = lat * Math.PI / 180;
+    const lambda = lon * Math.PI / 180;
+
+    // Solve theta iteratively
+    let theta = phi; // initial guess
+    for (let i = 0; i < 10; i++) {
+        const f = theta + Math.sin(theta) * Math.cos(theta) + 2 * Math.sin(theta) - Math.PI * Math.sin(phi);
+        const fPrime = 1 + Math.cos(2*theta) + 2*Math.cos(theta);
+        theta = theta - f / fPrime;
+    }
+
+    // Eckert IV constants
+    const xConst = 2 / Math.sqrt(4 * Math.PI + Math.PI * Math.PI) * hScale;
+    const yConst = 2 * Math.sqrt(Math.PI / (4 + Math.PI)) * vScale;
+
+    let x = xConst * (lambda - lon0 * Math.PI / 180) * (1 + Math.cos(theta));
+    let y = yConst * Math.sin(theta);
+
+    // Normalize to 0-100%
+    let xPercent = (x + Math.PI) / (2 * Math.PI) * 100 * hScale - 6.5;
+    let  yPercent = (Math.PI/2 - y) / (Math.PI) * 100 * vScale - 3;
+
+  // x = 3
+  // x = 96
+  xPercent = xPercent*(0.96-0.03)+3
+  
+  // y = 4
+  // y = 84.5
+  yPercent = yPercent*(0.845-0.04)+4
+
+  return [xPercent, yPercent]
 }

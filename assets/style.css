@@ -136,3 +136,8 @@ nav {
       transform: translateY(10px);
     }
   }
+
+#input {
+  height: 30px;
+  width: 200px;
+}

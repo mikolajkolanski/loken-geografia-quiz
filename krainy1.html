@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Geografia Wyspy</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <nav>
+        <button id="startButton" onclick="start_or_reset()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">0:00.00</span>
+        </div>
+    </nav>
+    <div id="header">
+        Kliknij start, aby zacząć 
+    </div>
+    <div id="imageContainer" style="margin-top:-50px">
+        <img src="https://d-maps.com/m/world/centreeurope/centreeurope05.svg" alt="Poczekaj aż się załaduje" />
+        <div id="points">
+            <button lat="61.5000" long="74.0000" name="Nizina Zachodniosyberyjska" />
+            <button lat="62.0000" long="100.0000" name="Wyżyna Środkowosyberyjska" />
+            <button lat="64.0000" long="143.0000" name="Góry Czerskiego" />
+            <button lat="52.0000" long="95.0000" name="Sajany" />
+            <button lat="49.0000" long="86.0000" name="Ałtaj" />
+            <button lat="42.0000" long="80.0000" name="Tien-Szan" />
+            <button lat="48.0000" long="68.0000" name="Pogórze Kazaskie" />
+            <button lat="41.0000" long="62.0000" name="Nizina Turańska" />
+            <button lat="58.0000" long="59.0000" name="Ural" />
+            <button lat="42.5000" long="44.5000" name="Góry Kaukaz" />
+            <button lat="33.0000" long="44.0000" name="Nizina Mezopotamska" />
+            <button lat="32.0000" long="50.0000" name="Góry Zagros" />
+            <button lat="32.0000" long="54.0000" name="Wyżyna Irańska" />
+            <button lat="27.0000" long="69.0000" name="Nizina Indusu" />
+            <button lat="38.5000" long="72.5000" name="Góry Pamir" />
+            <button lat="34.5000" long="69.0000" name="Góry Hindukusz" />
+            <button lat="35.0000" long="93.0000" name="Kunlun" />
+            <button lat="31.0000" long="88.0000" name="Wyżyna Tybetańska" />
+            <button lat="28.0000" long="84.0000" name="Himalaje" />
+            <button lat="25.0000" long="84.0000" name="Nizina Gangesu" />
+            <button lat="35.0000" long="105.0000" name="Nizina Chińska" />
+            <button lat="27.9881" long="86.9250" name="Mount Everest (Czomolungma)" />
+            <button lat="35.8808" long="76.5133" name="K2 (Chogori)" />
+            <button lat="43.3550" long="42.4375" name="Elbrus" />
+            <button lat="56.0500" long="160.6500" name="Kluczewska Sopka" />
+            <button lat="35.3606" long="138.7274" name="Fudżi-jama" />
+            <button lat="42.5000" long="103.0000" name="Gobi" />
+            <button lat="38.0000" long="82.5000" name="Takla Makan" />
+            <button lat="18.0000" long="52.5000" name="Rub al-Chali" />
+            <button lat="62.0000" long="15.0000" name="Góry Skandynawskie" />
+            <button lat="37.2000" long="-3.6000" name="Góry Betyckie" />
+            <button lat="42.7000" long="0.0000" name="Pireneje" />
+            <button lat="47.0000" long="2.0000" name="Nizina Francuska" />
+            <button lat="45.0000" long="3.0000" name="Masyw Centralny" />
+            <button lat="46.0000" long="10.0000" name="Alpy" />
+            <button lat="51.0000" long="10.0000" name="Nizina Niemiecka" />
+            <button lat="49.5000" long="11.5000" name="Wyżyna Bawarska" />
+            <button lat="50.5000" long="16.5000" name="Sudety" />
+            <button x="47" y="20" lat="48.5000" long="20.0000" name="Karpaty" />
+            <button lat="46.0000" long="24.0000" name="Wyżyna Transylwańska" />
+            <button lat="43.5000" long="12.5000" name="Apeniny" />
+            <button lat="43.5000" long="17.0000" name="Góry Dynarskie" />
+            <button lat="47.0000" long="20.0000" name="Wielka Nizina Węgierska" />
+            <button lat="44.5000" long="25.5000" name="Nizina Rumuńska (Wołoska)" />
+            <button lat="42.8000" long="22.7000" name="Bałkany" />
+            <button lat="52.0000" long="19.0000" name="Nizina Polska" />
+            <button lat="55.0000" long="35.0000" name="Nizina Wschodnioeuropejska" />
+            <button lat="50.5000" long="25.0000" name="Wyżyna Wołyńska" />
+            <button lat="49.0000" long="27.0000" name="Wyżyna Podolska" />
+            <button lat="44.0000" long="34.0000" name="Nizina Czarnomorska" />
+            <button lat="41.0000" long="50.0000" name="Nizina Nadkaspijska" />
+            <button lat="58.0000" long="59.0000" name="Ural (część europejska/rosyjska)" />
+            <button lat="55.0000" long="37.0000" name="Wyżyna Środkoworosyjska" />
+            <button lat="63.0000" long="26.0000" name="Pojezierze Fińskie" />
+            <button lat="45.8326" long="6.8652" name="Mont Blanc" />
+            <button lat="49.1667" long="20.1333" name="Gierlach (Gerlachovský štít)" />
+            <button lat="37.7510" long="14.9934" name="Etna" />
+            <button lat="40.8214" long="14.4265" name="Wezuwiusz" />
+            <button lat="63.9833" long="-19.6167" name="Hekla" />
+            <button lat="31.0000" long="-6.0000" name="Atlas" />
+            <button lat="13.0000" long="18.0000" name="Kotlina Czadu" />
+            <button lat="0.5000" long="18.5000" name="Kotlina Konga" />
+            <button lat="-29.0000" long="29.0000" name="Góry Smocze (Drakensberg)" />
+            <button lat="2.0000" long="38.0000" name="Wyżyna Wschodnioafrykańska" />
+            <button lat="6.0000" long="46.0000" name="Wyżyna Somalijska" />
+            <button lat="9.0000" long="39.0000" name="Wyżyna Abisyńska" />
+            <button lat="31.0675" long="-7.9186" name="Dżabal Tubkal" />
+            <button lat="0.1521" long="37.3084" name="Kenia (Mount Kenya)" />
+            <button lat="-3.0758" long="37.3533" name="Kilimandżaro (Kibo)" />
+            <button lat="-24.0000" long="15.0000" name="Namib" />
+            <button lat="23.0000" long="13.0000" name="Sahara" />
+            <button lat="25.0000" long="17.0000" name="Pustynia Libijska" />
+            <button lat="29.0000" long="-90.0000" name="Nizina Zatokowa" />
+            <button lat="38.0000" long="-77.0000" name="Nizina Atlantycka" />
+            <button lat="42.7000" long="-73.9000" name="Kotlina Hudsona" />
+            <button x="10" y="26" lat="39.0000" long="-105.5000" name="Wyżyna Kolorado" />
+            <button lat="23.0000" long="-102.0000" name="Wyżyna Meksykańska" />
+            <button lat="41.0000" long="-100.0000" name="Wielkie Równiny" />
+            <button lat="63.0695" long="-151.0074" name="Alaska (Denali / McKinley)" />
+            <button lat="37.5000" long="-81.5000" name="Appalachy" />
+            <button lat="39.0000" long="-106.0000" name="Góry Skaliste" />
+            <button lat="45.0000" long="-120.0000" name="Kordyliery (zasięg zachodni)" />
+            <button lat="-34.0000" long="146.0000" name="Wielkie Góry Wododziałowe" />
+            <button lat="-24.5000" long="142.0000" name="Wielki Basen Artezyjski" />
+            <button lat="-31.5000" long="130.0000" name="Nizina Nullarbor" />
+            <button x="86" y="70" lat="-36.5000" long="148.0000" name="Góry Śnieżne" />
+            <button x="88" y="80" lat="-43.3650" long="170.6240" name="Alpy Południowe" />
+            <button lat="-36.4550" long="148.2636" name="Góra Kościuszki" />
+            <button lat="-4.0833" long="137.1833" name="Jaya (Puncak Jaya / Carstensz)" />
+            <button lat="-20.0000" long="125.0000" name="Wielka Pustynia Piaszczysta" />
+            <button lat="-24.0000" long="127.0000" name="Pustynia Gibsona" />
+            <button lat="-30.0000" long="129.0000" name="Wielka Pustynia Wiktorii" />
+            <button lat="-34.0000" long="-58.0000" name="Nizina La Platy" />
+            <button lat="-3.0000" long="-60.0000" name="Nizina Amazonki" />
+            <button lat="4.0000" long="-60.0000" name="Wyżyna Gujańska" />
+            <button lat="7.0000" long="-66.0000" name="Nizina Orinoko" />
+            <button lat="-15.0000" long="-48.0000" name="Wyżyna Brazylijska" />
+            <button lat="-46.0000" long="-70.0000" name="Wyżyna Patagońska" />
+            <button lat="-15.0000" long="-70.0000" name="Andy" />
+            <button lat="-32.6532" long="-70.0109" name="Aconcagua" />
+            <button lat="-24.5000" long="-69.0000" name="Atacama" />
+        </div>
+    </div>
+    </div>
+</body>
+<script src="assets/script.js"></script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Geografia Wyspy</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <nav>
+        <button id="startButton" onclick="start_or_reset()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">0:00.00</span>
+        </div>
+    </nav>
+    <div id="header">
+        Kliknij start, aby zacząć 
+    </div>
+    <div id="imageContainer" style="margin-top:-50px">
+        <img src="https://d-maps.com/m/world/centreeurope/centreeurope05.svg" alt="Poczekaj aż się załaduje" />
+        <div id="points">
+            <button lat="19.35511783651009" long="-89.0508065859878" name="USA" />
+            <button lat="52.08113841714605" long="19.0546593322111" name="Polska" />
+            <button lat="-24.8042" long="134.54293" name="Aurstralia" />
+            <button lat="-26.70398" long="22.74606" name="RPA" />
+        </div>
+    </div>
+    </div>
+</body>
+<script src="assets/script_names.js"></script>
+</html>
