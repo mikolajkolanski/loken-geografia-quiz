@@ -20,7 +20,8 @@ var pointPressed = function () {
 
 
   if (name != place.getAttribute("name")) {
-    audio_wrong.cloneNode(true).play();
+    audio_wrong.currentTime = 0
+    audio_wrong.play();
     cursorTextPoint(this, name, false);
     if (errors < 2) errors += 1;
     if (errors > 1) {
@@ -31,7 +32,8 @@ var pointPressed = function () {
 
   // Correct answer
   cursorTextPoint(this, name, true);
-  audio_correct.cloneNode(true).play();
+  audio_correct.currentTime = 0
+  audio_correct.play();
 
   if (place.classList.contains("hint")) {
     place.classList.remove("hint");
