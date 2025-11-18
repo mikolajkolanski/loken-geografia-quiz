@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Geografia Krainy</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <nav>
+        <button id="startButton" onclick="start_or_reset()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">0:00.00</span>
+        </div>
+    </nav>
+    <div id="header">
+        Kliknij start, aby zacząć 
+    </div>
+    <div id="zoomWrapper" style="overflow: hidden;">
+        <div id="imageContainer" style="margin-bottom: -150px; transform: scale(3) translate(-7%, 33%);">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/World_location_map_%28equirectangular_180%29.svg" alt="Poczekaj aż się załaduje" style="border-style: solid;box-sizing: border-box;border-width: 3px;"/>
+            <div id="points" points-scale="0.6">
+                <button lat="75.2340" long="59.1398" name="wyspa Nowa Ziemia" />
+                <button lat="80.6500" long="55.0000" name="wyspa Ziemia Franciszka Józefa" />
+                <button lat="78.0000" long="20.0000" name="archipelag Svalbard" />
+                <button lat="79.0000" long="18.0000" name="wyspa Spitsbergen" />
+                <button lat="69.1008" long="49.1490" name="wyspa Kołgujew" />
+                <button lat="64.5000" long="-18.0000" name="wyspa Islandia" />
+                <button lat="62.0000" long="-6.7833" name="archipelag Wyspy Owcze" />
+                <button lat="60.3567" long="-1.2606" name="archipelag Szetlandy" />
+                <button lat="58.9847" long="-2.9594" name="archipelag Orkady" />
+                <button lat="57.7500" long="-6.7500" name="archipelag Hebrydy" />
+                <button lat="57.0000" long="-6.8000" name="archipelag Hebrydy" />
+                <button lat="54.0000" long="-2.0000" name="wyspa Wielka Brytania" />
+                <button lat="53.0000" long="-8.0000" name="wyspa Irlandia" />
+                <button lat="39.6000" long="3.0000" name="archipelag Baleary" />
+                <button lat="39.6953" long="3.0176" name="wyspa Majorka" />
+                <button lat="39.9167" long="4.1000" name="wyspa Minorka" />
+                <button lat="38.9067" long="1.4206" name="wyspa Ibiza" />
+                <button lat="42.0396" long="9.0129" name="wyspa Korsyka" />
+                <button lat="40.1209" long="9.0129" name="wyspa Sardynia" />
+                <button lat="37.6000" long="14.0154" name="wyspa Sycylia" />
+                <button lat="42.7750" long="10.2320" name="wyspa Elba" />
+                <button lat="38.4667" long="14.9667" name="archipelag Wyspy Liparyjskie" />
+                <button lat="35.9375" long="14.3754" name="wyspa Malta" />
+                <button lat="38.0000" long="20.5000" name="archipelag Wyspy Jońskie" />
+                <button lat="35.2401" long="24.8093" name="wyspa Kreta" />
+                <button lat="37.1667" long="25.3333" name="archipelag Cyklady" />
+                <button lat="39.2167" long="23.4167" name="archipelag Sporady" />
+                <button lat="36.4349" long="28.2176" name="wyspa Rodos" />
+                <button lat="35.1264" long="33.4299" name="wyspa Cypr" />
+                <button lat="55.4038" long="11.8255" name="wyspa Zelandia (Sjælland)" />
+                <button lat="55.4038" long="10.4024" name="wyspa Fionia (Fyn)" />
+                <button lat="54.4308" long="13.4043" name="wyspa Rugia (Rügen)" />
+                <button lat="54.0528" long="14.1123" name="wyspa Uznam (Usedom)" />
+                <button lat="53.8500" long="14.6167" name="wyspa Wolin" />
+                <button lat="55.2000" long="15.1000" name="wyspa Bornholm" />
+                <button lat="57.6348" long="18.2948" name="wyspa Gotlandia" />
+                <button lat="56.6948" long="16.5405" name="wyspa Olandia (Öland)" />
+                <button lat="60.1000" long="19.9000" name="archipelag Wyspy Alandzkie" />
+                <button lat="58.9000" long="22.6500" name="wyspa Hiuma (Hiiumaa)" />
+                <button lat="58.3456" long="22.4931" name="wyspa Sarema (Saaremaa)" />
+                <button lat="69.0000" long="35.0000" name="półwysep Kolski" />
+                <button lat="62.0000" long="15.0000" name="półwysep Skandynawski" />
+                <button lat="56.5000" long="9.0000" name="półwysep Jutlandzki" />
+                <button lat="48.3904" long="-4.4861" name="półwysep Bretoński" />
+                <button lat="50.0669" long="-5.7139" name="półwysep Kornwalijski" />
+                <button lat="40.0000" long="-4.0000" name="półwysep Iberyjski" />
+                <button lat="42.5000" long="12.5000" name="półwysep Apeniński" />
+                <button lat="42.5000" long="22.0000" name="półwysep Bałkański" />
+                <button lat="37.0500" long="22.2100" name="półwysep Peloponez" />
+                <button lat="45.3000" long="34.4000" name="półwysep Krymski" />
+                <button lat="68.9000" long="44.1000" name="półwysep Kanin" />
+                <button lat="45.1667" long="13.8333" name="półwysep Istryjski" />
+                <button lat="40.5000" long="23.0000" name="półwysep Chalcydycki" />
+                <button lat="52.0000" long="36.0000" name="nizina Wschodnioeuropejska" />
+                <button lat="52.4064" long="16.9252" name="nizina Wielkopolska" />
+                <button lat="53.1325" long="23.1688" name="nizina Podlaska" />
+                <button lat="52.2297" long="21.0122" name="nizina Mazowiecka" />
+                <button lat="52.5000" long="10.0000" name="nizina Niemiecka" />
+                <button lat="46.0000" long="18.0000" name="nizina Panońska" />
+                <button lat="44.5000" long="25.3500" name="nizina Wołoska" />
+                <button lat="46.0000" long="36.0000" name="nizina Czarnomorska" />
+                <button lat="45.0200" long="9.0869" name="nizina Padańska" />
+                <button lat="52.0000" long="-1.5000" name="nizina Angielska" />
+                <button lat="47.0000" long="2.0000" name="nizina Francuska" />
+                <button lat="45.7640" long="4.8357" name="rów Rodanu" />
+                <button lat="52.0000" long="19.0000" name="nizina Polska" />
+                <button lat="51.5000" long="27.1667" name="nizina Polesie" />
+                <button lat="55.0000" long="43.0000" name="wyżyna Nadwołżańska" />
+                <button lat="51.0000" long="38.0000" name="wyżyna Środkoworosyjska" />
+                <button lat="50.5667" long="26.0000" name="wyżyna Wołyńska" />
+                <button lat="48.7500" long="27.5000" name="wyżyna Podolska" />
+                <button lat="46.0000" long="24.0000" name="wyżyna Transylwańska" />
+                <button lat="50.2500" long="20.0000" name="wyżyna Małopolska" />
+                <button lat="50.9000" long="22.5667" name="wyżyna Lubelska" />
+                <button lat="48.7904" long="11.4979" name="wyżyna Bawarska" />
+                <button lat="55.4167" long="-3.3667" name="wyżyna Południowoszkocka" />
+                <button lat="44.0000" long="3.0000" name="wyżyna Masyw Centralny" />
+                <button lat="49.5000" long="16.2500" name="wyżyna Czesko-Morawska" />
+                <button lat="43.2000" long="-4.0000" name="góry Kantabryjskie" />
+                <button lat="40.0000" long="-4.0000" name="góry Kastylijskie" />
+                <button lat="37.0000" long="-4.0000" name="góry Betyckie" />
+                <button lat="38.1500" long="-4.7000" name="góry Sierra Morena" />
+                <button lat="40.0000" long="-2.0000" name="góry Iberyjskie" />
+                <button lat="42.5000" long="1.5000" name="góry Pireneje" />
+                <button lat="46.5000" long="10.2000" name="góry Alpy" />
+                <button lat="46.8000" long="6.3000" name="góry Jura" />
+                <button lat="48.0000" long="7.0000" name="góry Wogezy" />
+                <button lat="50.6000" long="13.4000" name="góry Rudawy" />
+                <button lat="50.3500" long="16.5000" name="góry Sudety" />
+                <button lat="48.6667" long="18.5000" name="góry Karpaty" />
+                <button lat="43.8000" long="17.5000" name="góry Dynarskie" />
+                <button lat="42.0000" long="13.0000" name="góry Apeniny" />
+                <button lat="43.0000" long="24.5000" name="góry Bałkańskie" />
+                <button lat="62.0000" long="14.0000" name="góry Skandynawskie" />
+                <button lat="60.0000" long="60.0000" name="góry Ural" />
+                <button lat="57.0000" long="-4.0000" name="góry Kaledońskie" />
+                <button lat="56.8000" long="-4.1000" name="góry Grampiany" />
+                <button lat="54.5000" long="-2.5000" name="góry Penińskie" />
+                <button lat="42.0000" long="44.0000" name="góry Kaukaz" />
+                <button lat="37.7510" long="14.9934" name="wulkan Etna" />
+                <button lat="40.8214" long="14.4265" name="wulkan Wezuwiusz" />
+                <button lat="63.9810" long="-19.6720" name="wulkan Hekla" />
+                <button lat="65.0284" long="-16.7496" name="wulkan Askja" />
+                <button lat="38.7897" long="15.2130" name="wulkan Stromboli" />
+                <button lat="38.4190" long="14.9628" name="wulkan Vulcano" />
+                <button lat="71.0000" long="40.0000" name="morze Barentsa" />
+                <button lat="65.0000" long="37.0000" name="morze Białe" />
+                <button lat="59.0000" long="20.0000" name="morze Bałtyckie" />
+                <button lat="56.0000" long="2.0000" name="morze Północne" />
+                <button lat="65.0000" long="5.0000" name="morze Norweskie" />
+                <button lat="54.5000" long="-8.0000" name="morze Irlandzkie" />
+                <button lat="34.0000" long="18.0000" name="morze Śródziemne" />
+                <button lat="40.5000" long="12.0000" name="morze Tyrreńskie" />
+                <button lat="37.0000" long="18.0000" name="morze Jońskie" />
+                <button lat="43.2258" long="14.9155" name="morze Adriatyckie" />
+                <button lat="39.0000" long="24.0000" name="morze Egejskie" />
+                <button lat="44.0000" long="8.7500" name="morze Liguryjskie" />
+                <button lat="40.9000" long="26.5000" name="morze Marmara" />
+                <button lat="44.0000" long="35.0000" name="morze Czarne" />
+                <button lat="46.5000" long="36.5000" name="morze Azowskie" />
+                <button lat="69.0000" long="67.5000" name="zatoka Bajdaracka" />
+                <button lat="64.7650" long="23.0044" name="zatoka Botnicka" />
+                <button lat="60.5373" long="29.6194" name="zatoka Fińska" />
+                <button lat="57.7500" long="23.5000" name="zatoka Ryska" />
+                <button lat="54.4000" long="18.6500" name="zatoka Gdańska" />
+                <button lat="54.0670" long="14.0830" name="zatoka Pomorska" />
+                <button lat="45.0000" long="-4.0000" name="zatoka Biskajska" />
+                <button lat="48.6500" long="-2.0333" name="zatoka Saint-Malo" />
+                <button lat="43.0000" long="4.0000" name="zatoka Lwia" />
+                <button lat="58.0000" long="9.0000" name="cieśnina Skagerrak" />
+                <button lat="57.5000" long="10.5000" name="cieśnina Kattegat" />
+                <button lat="55.6000" long="11.2000" name="cieśnina Wielki Bełt" />
+                <button lat="55.4000" long="9.9000" name="cieśnina Mały Bełt" />
+                <button lat="55.6700" long="12.6000" name="cieśnina Sund" />
+                <button lat="52.0830" long="-5.7500" name="cieśnina Świętego Jerzego" />
+                <button lat="51.0367" long="1.5486" name="cieśnina Kaletańska" />
+                <button lat="49.8612" long="-2.0634" name="kanał La Manche" />
+                <button lat="54.1000" long="9.7000" name="kanał Kiloński" />
+                <button lat="36.0000" long="-5.5000" name="cieśnina Gibraltarska" />
+                <button lat="38.1517" long="15.6014" name="cieśnina Mesyńska" />
+                <button lat="40.1500" long="18.4000" name="cieśnina Otranto" />
+                <button lat="40.1500" long="26.4000" name="cieśniny Dardanele" />
+                <button lat="41.0000" long="29.0000" name="cieśnina Bosfor" />
+                <button lat="70.5000" long="58.0000" name="cieśnina Karskie Wrota" />
+                <button lat="36.3656" long="14.5786" name="cieśnina Maltańska" />
+                <button lat="37.0000" long="12.1000" name="cieśnina Sycylijska" />
+                <button lat="60.9500" long="31.5000" name="jezioro Ładoga" />
+                <button lat="61.6906" long="35.6556" name="jezioro Onega" />
+                <button lat="58.9167" long="13.5000" name="jezioro Wener" />
+                <button lat="58.4000" long="14.6000" name="jezioro Wetter" />
+                <button lat="59.6167" long="16.7500" name="jezioro Melar" />
+                <button lat="68.9062" long="27.0278" name="jezioro Inari" />
+                <button lat="61.2500" long="28.2500" name="jezioro Saimaa" />
+                <button lat="58.6830" long="27.4830" name="jezioro Pejpus" />
+                <button lat="46.8500" long="17.7300" name="jezioro Balaton" />
+                <button lat="47.6500" long="9.2500" name="jezioro Bodeńskie" />
+                <button lat="46.4400" long="6.5850" name="jezioro Genewskie" />
+                <button lat="45.6040" long="10.6040" name="jezioro Garda" />
+                <button lat="46.0167" long="9.2667" name="jezioro Como" />
+                <button lat="46.1239" long="8.5686" name="jezioro Maggiore" />
+                <button lat="47.8500" long="16.8170" name="jezioro Nezyderskie" />
+                <button lat="42.0700" long="19.0800" name="jezioro Szkoderskie" />
+                <button lat="41.0667" long="20.8167" name="jezioro Ochrydzkie" />
+                <button lat="64.8000" long="27.5000" name="jezioro Oulujärvi" />
+                <button lat="58.3670" long="38.4330" name="zbiornik Rybiński" />
+                <button lat="58.1160" long="56.3400" name="zbiornik Kamski" />
+                <button lat="55.2760" long="49.5950" name="zbiornik Kujbyszewski" />
+                <button lat="52.8330" long="48.5000" name="zbiornik Saratowski" />
+                <button lat="49.1300" long="44.9400" name="zbiornik Wołgogradzki" />
+                <button lat="47.8330" long="42.8330" name="zbiornik Czimliański" />
+                <button lat="50.5333" long="30.8333" name="zbiornik Kijowski" />
+                <button lat="49.0000" long="33.0000" name="zbiornik Krzemieńczucki" />
+                <button lat="46.7500" long="34.9000" name="zbiornik Kachowski" />
+                <button lat="54.0367" long="23.0983" name="jezioro Wigry" />
+                <button lat="54.2670" long="22.8170" name="jezioro Hańcza" />
+                <button lat="53.7500" long="21.7472" name="jezioro Śniardwy" />
+                <button lat="54.1800" long="21.6967" name="jezioro Mamry" />
+                <button lat="54.7136" long="17.4089" name="jezioro Łebsko" />
+                <button lat="36.7800" long="-6.3500" name="rzeka Gwadalkiwir" />
+                <button lat="37.2000" long="-7.4000" name="rzeka Gwadiana" />
+                <button lat="41.1667" long="-8.6667" name="rzeka Duero" />
+                <button lat="40.8333" long="0.6667" name="rzeka Ebro" />
+                <button lat="38.7000" long="-9.1333" name="rzeka Tag" />
+                <button lat="43.5000" long="4.5000" name="rzeka Rodan" />
+                <button lat="47.2667" long="-1.5556" name="rzeka Loara" />
+                <button lat="45.1667" long="-1.0833" name="rzeka Garonna" />
+                <button lat="49.5000" long="0.0833" name="rzeka Sekwana" />
+                <button lat="41.7667" long="12.2333" name="rzeka Tyber" />
+                <button lat="45.0000" long="12.0000" name="rzeka Pad" />
+                <button lat="51.5000" long="4.5000" name="rzeka Moza" />
+                <button lat="51.8000" long="4.4000" name="rzeka Ren" />
+                <button lat="53.5333" long="8.5833" name="rzeka Wezera" />
+                <button lat="53.8667" long="8.7000" name="rzeka Łaba" />
+                <button lat="51.5000" long="0.5000" name="rzeka Tamiza" />
+                <button lat="45.1600" long="29.6800" name="rzeka Dunaj" />
+                <button lat="53.5333" long="16.0000" name="rzeka Drawa" />
+                <button lat="44.8150" long="20.4600" name="rzeka Sawa" />
+                <button lat="44.3000" long="10.0000" name="rzeka Cisa" />
+                <button lat="46.2833" long="28.6000" name="rzeka Prut" />
+                <button lat="46.8500" long="29.6000" name="rzeka Dniestr" />
+                <button lat="50.4500" long="30.5233" name="rzeka Dniepr" />
+                <button lat="55.0000" long="21.0000" name="rzeka Niemen" />
+                <button lat="47.2500" long="39.7000" name="rzeka Don" />
+                <button lat="48.9000" long="44.7000" name="rzeka Wołga" />
+                <button lat="51.5270" long="51.6100" name="rzeka Ural" />
+                <button lat="64.5000" long="40.5333" name="rzeka Dwina Północna" />
+                <button lat="56.9500" long="24.1167" name="rzeka Dźwina" />
+                <button lat="68.5000" long="52.6667" name="rzeka Peczora" />
+                <button lat="51.5000" long="27.0000" name="rzeka Prypeć" />
+                <button lat="55.2000" long="49.2670" name="rzeka Kama" />
+                <button lat="54.3500" long="18.6500" name="rzeka Wisła" />
+                <button lat="53.4000" long="14.5500" name="rzeka Odra" />
+                <button lat="52.2500" long="16.9000" name="rzeka Warta" />
+                <button lat="52.6500" long="16.5000" name="rzeka Noteć" />
+                <button lat="52.8000" long="21.7500" name="rzeka Narew" />
+                <button lat="71.1667" long="25.7833" name="przylądek Północny" />
+                <button lat="38.7833" long="-9.5000" name="przylądek Roca" />
+                <button lat="36.4000" long="22.3333" name="przylądek Matapan" />
+                <button lat="61.5000" long="25.0000" name="pojezierze Fińskie" />
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="assets/script.js"></script>
+</html>

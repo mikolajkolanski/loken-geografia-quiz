@@ -73,6 +73,9 @@ nav {
   cursor: pointer;
   border-width: 0.2rem;
   border-color: black;
+
+  padding: 0;
+  transform: translate(20%, 00%)
 }
 
 #points {

@@ -3,6 +3,7 @@ const header = document.getElementById("header");
 const score_elem = document.getElementById("score");
 const timer_elem = document.getElementById("clock");
 const start_butt_elem = document.getElementById("startButton");
+const points_elem = document.getElementById("points");
 var start_places = [];
 var places;
 var place;
@@ -18,7 +19,7 @@ const audio_wrong = new Audio('assets/error.mp3');
 var pointPressed = function () {
   var name = this.getAttribute("name");
 
-
+  // If incorrect
   if (name != place.getAttribute("name")) {
     audio_wrong.currentTime = 0
     audio_wrong.play();
@@ -141,7 +142,17 @@ for (var i = 0; i < elements.length; i++) {
   if (!isNaN(dy)) y += dy;
   elements[i].style.left = x + "%";
   elements[i].style.top = y + "%";
-  elements[i].style.width = elements[i].getAttribute("size") + "rem";
+  
+  let point_size = parseFloat(elements[i].getAttribute("size"))
+  // console.log(point_size)
+  if (isNaN(point_size)) { point_size = 1.0 }
+
+  let points_scale = parseFloat(points_elem.getAttribute('points-scale'))
+  if (isNaN(points_scale)) { points_scale = 1.0 }
+
+  elements[i].style.width = point_size*points_scale + "rem";
+  // console.log(point_size*points_scale + "rem")
+  // elements[i].style.width = "69px"
   elements[i].addEventListener("mousedown", pointPressed, false);
 }
 
