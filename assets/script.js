@@ -149,8 +149,12 @@ for (var i = 0; i < elements.length; i++) {
 
   let points_scale = parseFloat(points_elem.getAttribute('points-scale'))
   if (isNaN(points_scale)) { points_scale = 1.0 }
+  // console.log('translate(50%, 50%) scale(%{points_scale*100})')
 
-  elements[i].style.width = point_size*points_scale + "rem";
+  elements[i].style.width = point_size + "rem";
+  
+  // let inv = 1/points_scale
+  elements[i].style.transform = 'translate(50%, 50%) scale(' + points_scale*100 + '%)'
   // console.log(point_size*points_scale + "rem")
   // elements[i].style.width = "69px"
   elements[i].addEventListener("mousedown", pointPressed, false);
@@ -170,10 +174,10 @@ function calcXY(lon, lat) {
   // x = 3
   // x = 94
   // xPercent = x*(0.94-0.03)+3
-  xPercent = x 
+  xPercent = x-1.1
   // y = 0
   // y = 74
-  yPercent = y*(0.74-0)+0
+  yPercent = y*(0.74-0)-0.5
 
   return [xPercent, yPercent]
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scalling test</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <nav>
+        <button id="startButton" onclick="start_or_reset()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">0:00.00</span>
+        </div>
+    </nav>
+    <div id="header">
+        Kliknij start, aby zacząć 
+    </div>
+    <div id="zoomWrapper" style="overflow: hidden;">
+        <div id="imageContainer" style="margin-bottom: -150px; transform: scale(3.5) translate(-7%, 33%);">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/World_location_map_%28equirectangular_180%29.svg" alt="Poczekaj aż się załaduje" style="border-style: solid;box-sizing: border-box;border-width: 3px;"/>
+            <div id="points" points-scale="0.1">
+                <button lat="40.3117205302865" long="50.3466462664059" name="Agranistan" />
+               
+                <button lat="57.71410359864048" long="10.514252014245974" name="Dania" />
+                <button lat="39.963150718575356" long="4.087677162608192" name="Hiszpania" />
+                <button lat="61.5000" long="25.0000" name="pojezierze Fińskie" />
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="assets/script.js"></script>
+</html>
