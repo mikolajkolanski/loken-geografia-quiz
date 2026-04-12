@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Geografia Miasta</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <nav>
+        <button id="startButton" onclick="start_or_reset()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">0:00.00</span>
+        </div>
+    </nav>
+    <div id="header">
+        Kliknij start, aby zacząć 
+    </div>
+    <div id="imageContainer" style="margin-bottom: -150px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/World_location_map_%28equirectangular_180%29.svg" alt="Poczekaj aż się załaduje" style="border-style: solid;box-sizing: border-box;border-width: 3px;"/>
+        <div id="points" style="margin-left: -10px;">
+            <button lat="-26.2044" long="28.0456" name="Johanesburg" />
+            <button lat="30.0444" long="31.2358" name="Kair" />
+            <button lat="-4.3250" long="15.3222" name="Kinszasa" />
+            <button lat="6.5244" long="3.3792" name="Lagos" />
+
+            <button lat="-23.5500" long="-46.6333" name="Sao Paulo" />
+            <button lat="4.6097" long="-74.0817" name="Bogota" />
+            <button lat="-22.9068" long="-43.1729" name="Rio de Janeiro" />
+            <button lat="-12.0432" long="-77.0282" name="Lima" />
+            <button lat="-34.6037" long="-58.3816" name="Buenos Aires" />
+
+            <button lat="19.4326" long="-99.1332" name="Meksyk" />
+            <button lat="40.7128" long="-74.0060" name="Nowy Jork" />
+            <button lat="34.0522" long="-118.2437" name="Los Angeles" />
+            <button lat="41.8781" long="-87.6298" name="Chicago-Naperville-Joliet" />
+
+            <button lat="41.0082" long="28.9784" name="Stambuł" />
+            <button lat="37.5665" long="126.9780" name="Seul" />
+            <button lat="24.8607" long="67.0011" name="Karaczi" />
+            <button lat="19.0760" long="72.8777" name="Bombaj" />
+            <button lat="31.2304" long="121.4737" name="Szanghaj" />
+            <button lat="23.8103" long="90.4125" name="Dhaka" />
+            <button lat="23.1291" long="113.2644" name="Kanton" />
+            <button lat="39.9042" long="116.4074" dx="-0.5" dy="-0.5" name="Pekin" />
+            <button lat="28.7041" long="77.1025" name="Delhi" />
+            <button lat="-6.2088" long="106.8456" name="Dżakarta" />
+            <button lat="35.6892" long="51.3890" name="Teheran" />
+            <button lat="35.6895" long="139.6917" name="Tokio" />
+            <button lat="31.5204" long="74.3587" name="Lahaur" />
+            <button lat="13.7563" long="100.5018" name="Bangkok" />
+            <button lat="30.6600" long="104.0633" name="Chengdu" />
+            <button lat="29.5500" long="106.5069" name="Chongqing" />
+            <button lat="39.1333" long="117.2000" name="Tiencin" />
+            <button lat="30.5833" long="114.2667" name="Wuhan" />
+            <button lat="22.5726" long="88.3639" name="Kalkuta" />
+            <button lat="38.0428" long="114.5149" name="Shijiazhuang" />
+            <button lat="14.5995" long="120.9842" name="Manila" />
+
+            <button lat="59.9386" long="30.3141" name="San Petersburg" />
+            <button lat="55.7558" long="37.6173" name="Moskwa" />
+            <button lat="40.4168" long="-3.7038" name="Madryt" />
+            <button lat="52.5200" long="13.4050" name="Berlin" />
+            <button lat="48.8566" long="2.3522" name="Paryż" />
+            <button lat="51.5074" long="-0.1278" name="Londyn" />
+
+            <button lat="-27.4698" long="153.0251" name="Brisbane" />
+            <button lat="-33.8688" long="151.2093" name="Sydney" />
+            <button lat="-37.8136" long="144.9631" name="Melbourne" />
+        </div>
+    </div>
+    </div>
+</body>
+<script src="assets/script.js"></script>
+</html>
