@@ -12,6 +12,12 @@ var errors;
 var start_timer;
 var started = false;
 
+scale_lon = points_elem.getAttribute('scale-lon')
+scale_lat = points_elem.getAttribute('scale-lat')
+move_lon = points_elem.getAttribute('move-lon')
+move_lat = points_elem.getAttribute('move-lat')
+
+
 // Audio
 const audio_correct = new Audio('assets/correct.mp3');
 const audio_wrong = new Audio('assets/error.mp3');
@@ -167,6 +173,15 @@ function calcXY(lon, lat) {
   // Normalize longitude to [-180, 180]
   lon = ((lon + 180) % 360 + 360) % 360 - 180;
 
+  // // scale to image size
+  // lat = (lat-bot_lat)/(top_lat-bot_lat)
+  // lon = (lon-left_long)/(right_long-left_long)
+  if (!isNaN(move_lat)) lat = lat-move_lat
+  if (!isNaN(scale_lat)) lat = lat*scale_lat
+
+  if (!isNaN(move_lon)) lon = lon-move_lon
+  if (!isNaN(scale_lon)) lon = lon*scale_lon
+  
   // Convert to %
   const x = (lon + 180) / 360 * 100;   // 0 → 100
   const y = (90 - lat) / 180 * 100-1;    // 0 (north) → 100 (south)
