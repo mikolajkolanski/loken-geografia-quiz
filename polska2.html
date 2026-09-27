@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Geografia Polska</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <nav>
+        <button id="startButton" onclick="start_or_reset()"><span>Start</span>
+        </button>
+        <div class="scoreCtn">
+            <span id="score">Wynik</span>
+        </div>
+        <div class="scoreCtn">
+            <span id="clock">0:00.00</span>
+        </div>
+    </nav>
+    <div id="header">
+        Kliknij start, aby zacząć 
+    </div>
+    <div id="imageContainer" style="margin-bottom: -150px;">
+        <img src="https://mapy.com.pl/wp-content/uploads/2017/03/Polska_fiz_750_950x900mm_versja3-logoWP-RGB72.jpg" alt="Poczekaj aż się załaduje" style="border-style: solid;box-sizing: border-box;border-width: 3px; width: 700px; margin-left:25%;"/>
+        <div id="points" scale-lon="17" scale-lat="25" move-lon="19.4" move-lat="51.8">
+            <button lat="50.720000" long="15.930000" name="Sudety" />
+            <button lat="50.830000" long="15.330000" name="Góry Izerskie" />
+            <button lat="51.030000" long="15.920000" name="Góry Kaczawskie" />
+            <button lat="50.740000" long="15.740000" name="Karkonosze" />
+            <button lat="50.670000" long="16.490000" name="Góry Sowie" />
+            <button lat="50.470000" long="16.340000" name="Góry Stołowe" />
+            <button lat="50.350000" long="16.530000" name="Góry Orlickie" />
+            <button lat="50.380000" long="16.850000" name="Góry Złote" />
+            <button lat="50.210000" long="16.850000" name="Masyw Śnieżnika" />
+            <button lat="50.430000" long="16.670000" name="Góry Bystrzyckie" />
+            <button lat="50.200000" long="17.850000" name="Płaskowyż Głubczycki" />
+            <button lat="50.900000" long="16.950000" name="Przedgórze Sudeckie" />
+            <button lat="51.310000" long="17.060000" name="Wał Trzebnicki" />
+            <button lat="49.550000" long="20.150000" dy="1" name="Karpaty" />
+            <button lat="49.180000" long="20.000000" dy="0.5" name="Tatry" />
+            <button lat="49.150000" long="22.650000" name="Bieszczady" />
+            <button lat="49.700000" long="18.970000" name="Beskid Śląski" />
+            <button lat="49.650000" long="19.400000" name="Beskid Żywiecki" />
+            <button lat="49.650000" long="20.050000" name="Beskid Makowski" />
+            <button lat="49.650000" long="20.400000" name="Beskid Wyspowy" />
+            <button lat="49.540000" long="20.110000" dx="-0.5" name="Gorce" />
+            <button lat="49.420000" long="20.350000" name="Pieniny" />
+            <button lat="49.550000" long="20.900000" name="Beskid Sądecki" />
+            <button lat="49.450000" long="21.800000" name="Beskid Niski" />
+            <button lat="50.900000" long="20.900000" dx="0.5" dy="0.5" name="Góry Świętokrzyskie" />
+            <button lat="49.750000" long="22.650000" name="Pogórze Przemyskie" />
+            <button lat="49.800000" long="22.300000" name="Pogórze Dynowskie" />
+            <button lat="49.850000" long="21.800000" name="Pogórze Strzyżowskie" />
+            <button lat="49.820000" long="21.000000" name="Pogórze Ciężkowickie" />
+            <button lat="49.990000" long="20.060000" name="Pogórze Wielickie" />
+            <button lat="54.216700" long="18.116700" name="Wieżyca" />
+            <button lat="50.866700" long="16.708300" name="Ślęża" />
+            <button lat="50.448300" long="18.166700" name="Góra Św. Anny" />
+            <button lat="50.898300" long="20.866700" name="Łysica" />
+            <button lat="49.179500" long="20.088300" dx="0.2" dy="-0.2" name="Rysy" />
+            <button lat="50.736145" long="15.740154" name="Śnieżka" />
+            <button lat="49.542944" long="20.111556" dx="0.5" name="Turbacz" />
+            <button lat="49.074771" long="22.726323" name="Tarnica" />
+            <button lat="49.572980" long="19.529340" name="Babia Góra" />
+            <button lat="49.250700" long="19.933900" dx="-0.2" dy="-0.5" name="Giewont" />
+            <button lat="49.231940" long="19.981940" name="Kasprowy Wierch" />
+            <button lat="53.850000" long="21.550000" name="Pojezierze Mazurskie" />
+            <button lat="53.870000" long="17.850000" dx="0" dy="-0.5" name="Pojezierze Pomorskie" />
+            <button lat="52.720000" long="17.280000" dx="0.5" name="Pojezierze Wielkopolskie" />
+            <button lat="54.080000" long="22.930000" name="Pojezierze Suwalskie" />
+            <button lat="53.980000" long="21.780000" name="Kraina Wielkich Jezior Mazurskich" />
+            <button lat="53.800000" long="20.500000" name="Pojezierze Olsztyńskie" />
+            <button lat="53.150000" long="18.920000" name="Pojezierze Chełmińsko-Dobrzyńskie" />
+            <button lat="54.230000" long="18.120000" dx="-0.5" dy="-0.5" name="Pojezierze Kaszubskie" />
+            <button lat="53.530000" long="15.820000" name="Pojezierze Drawskie" />
+            <button lat="52.920000" long="14.860000" name="Pojezierze Myśliborskie" />
+            <button lat="52.100000" long="15.420000" name="Pojezierze Lubuskie" />
+            <button lat="52.530000" long="17.580000" name="Pojezierze Gnieźnieńskie" />
+            <button lat="52.350000" long="17.100000" name="Pojezierze Poznańskie" />
+            <button lat="52.800000" long="18.260000" name="Pojezierze Kujawskie" />
+            <button lat="50.650000" long="21.790000" name="Kotlina Sandomierska" />
+            <button lat="50.040000" long="19.200000" name="Kotlina Oświęcimska" />
+            <button lat="53.550000" long="22.820000" name="Kotlina Biebrzańska" />
+            <button lat="52.220000" long="21.000000" dx="-0.5" dy="0.5" name="Kotlina Warszawska" />
+            <button lat="50.410000" long="18.920000" name="Wyżyna Śląska" />
+            <button lat="50.450000" long="19.600000" name="Wyżyna Krakowsko-Częstochowska" />
+            <button lat="50.360000" long="20.030000" name="Wyżyna Miechowska" />
+            <button lat="50.600000" long="20.620000" name="Niecka Nidziańska" />
+            <button lat="50.120000" long="20.620000" name="Wyżyna Małopolska" />
+            <button lat="50.870000" long="20.630000" name="Wyżyna Kielecka" />
+            <button lat="50.600000" long="21.200000" name="Wyżyna Sandomierska" />
+            <button lat="51.150000" long="22.550000" name="Wyżyna Lubelska" />
+            <button lat="50.550000" long="22.850000" name="Roztocze" />
+            <button lat="53.430000" long="14.550000" name="Nizina Szczecińska" />
+            <button lat="52.020000" long="17.200000" dx="-0.5" name="Nizina Wielkopolska" />
+            <button lat="52.694000" long="21.466000" name="Nizina Mazowiecka" />
+            <button lat="52.500000" long="22.820000" name="Nizina Podlaska" />
+            <button lat="51.000000" long="17.000000" name="Nizina Śląska" />
+            <button lat="51.600000" long="15.100000" name="Nizina Śląsko-Łużycka" />
+            <button lat="54.150000" long="18.950000" name="Żuławy Wiślane" />
+            <button lat="54.350000" long="18.650000" name="Pobrzeże Gdańskie" />
+            <button lat="54.190000" long="16.180000" name="Pobrzeże Koszalińskie" />
+            <button lat="53.850000" long="14.550000" name="Pobrzeże Szczecińskie" />
+            <button lat="54.650000" long="16.900000" name="Wybrzeże Słowińskie" />
+        </div>
+    </div>
+    </div>
+</body>
+<script src="assets/script.js"></script>
+</html>
