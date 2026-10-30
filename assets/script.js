@@ -1,36 +1,125 @@
+"use strict";
+// -------- DOM -------- 
 const elements = document.getElementById("points").children;
 const header = document.getElementById("header");
-const score_elem = document.getElementById("score");
-const timer_elem = document.getElementById("clock");
-const start_butt_elem = document.getElementById("startButton");
-const points_elem = document.getElementById("points");
-var start_places = [];
-var places;
-var place;
-var score;
-var errors;
-var start_timer;
-var started = false;
-
-scale_lon = points_elem.getAttribute('scale-lon')
-scale_lat = points_elem.getAttribute('scale-lat')
-move_lon = points_elem.getAttribute('move-lon')
-move_lat = points_elem.getAttribute('move-lat')
+const scoreElem = document.getElementById("score");
+const timerElem = document.getElementById("clock");
+const startButtElem = document.getElementById("startButton");
+const pointsElem = document.getElementById("points");
 
 
-// Audio
-const audio_correct = new Audio('assets/correct.mp3');
-const audio_wrong = new Audio('assets/error.mp3');
+// -------- CONFIG -------- 
+const config = {
+  scaleLon: parseFloat(pointsElem.getAttribute('scale-lon')) || 1,
+  scaleLat: parseFloat(pointsElem.getAttribute('scale-lat')) || 1,
+  moveLon: parseFloat(pointsElem.getAttribute('move-lon')) || 0,
+  moveLat: parseFloat(pointsElem.getAttribute('move-lat')) || 0,
+  pointsScaleGlobal: parseFloat(pointsElem.getAttribute('points-scale')) || 1,
+}
 
-var pointPressed = function () {
-  var name = this.getAttribute("name");
+// -------- AUDIO -------- 
+const audioCorrect = new Audio('assets/correct.mp3');
+const audioWrong = new Audio('assets/error.mp3');
+
+// -------- GAME STATE -------- 
+let startPlaces = [];
+let places;
+let place;
+let score;
+let errors;
+let timerInterval;
+let startTimer;
+let started = false;
+
+// -------- HELPER -------- 
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function playSound(sound) {
+  sound.currentTime = 0
+  sound.play();
+}
+
+
+// -------- GAME -------- 
+function end() {
+  header.innerText =
+    `Wynik: ${Math.round((score / (startPlaces.length * 3)) * 100)}%`;
+  clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+function nextPlace() {
+  errors = 0;
+  if (places.length === 0) {
+    end();
+    return;
+  }
+  place = places.pop();
+
+  header.innerText = `Znajdź '${place.getAttribute("name")}'`;
+}
+
+
+function reset() {
+  startButtElem.innerText = 'Start';
+  end();
+}
+
+
+function updateScore() {
+  scoreElem.innerText = `${score.toString()}/${startPlaces.length * 3}`;
+}
+
+
+function start() {
+  startButtElem.innerText = 'Reset';
+
+  startPlaces.forEach((p) => {
+    p.className = '';
+  })
+
+  places = startPlaces.slice();
+  places = shuffle(places)
+  console.log(places);
+  score = 0;
+  startTimer = new Date();
+
+  timerInterval = setInterval(function () {
+    let delta = Date.now() - startTimer;
+    timerElem.innerText =
+      Math.floor(delta / 60000) +
+      ":" +
+      ((Math.floor(delta / 1000) % 60) + "").padStart(2, "0") +
+      "." +
+      ((Math.floor(delta / 10) % 100) + "").padStart(2, "0");
+  }, 10);
+
+  updateScore();
+  nextPlace();
+}
+
+
+function start_or_reset() {
+  if (!started) start()
+  else reset()
+  started = !started;
+}
+
+
+let pointPressed = function () {
+  let name = this.getAttribute("name");
 
   // If incorrect
-  if (name != place.getAttribute("name")) {
-    audio_wrong.currentTime = 0
-    audio_wrong.play();
+  if (name !== place.getAttribute("name")) {
+    playSound(audioWrong);
     cursorTextPoint(this, name, false);
-    if (errors < 2) errors += 1;
+    errors = Math.min(errors+1, 2);
     if (errors > 1) {
       place.classList.add("hint");
     }
@@ -39,22 +128,22 @@ var pointPressed = function () {
 
   // Correct answer
   cursorTextPoint(this, name, true);
-  audio_correct.currentTime = 0
-  audio_correct.play();
+  playSound(audioCorrect);
 
   if (place.classList.contains("hint")) {
     place.classList.remove("hint");
     this.classList.add("red");
-  } else if (errors == 1) {
+  } else if (errors === 1) {
     this.classList.add("orange");
   } else {
     this.classList.add("correct");
   }
   score += 3 - errors;
   updateScore();
-  next();
+  nextPlace();
   return;
 };
+
 
 function cursorTextPoint(point, text, correct) {
   const p = point.getBoundingClientRect();
@@ -65,106 +154,10 @@ function cursorTextPoint(point, text, correct) {
   elem.style.left = `${p.left+16}px`;
   elem.style.top = `${p.top}px`;
   document.body.appendChild(elem);
+
+  setTimeout(() => elem.remove(), 4000);  
 } 
 
-function start() {
-  start_butt_elem.innerText = 'Reset';
-
-  start_places.forEach((p) => {
-    p.className = '';
-  })
-
-  places = start_places.slice();
-  places.sort(() => 0.5 - Math.random());
-  console.log(places);
-  score = 0;
-  start_timer = new Date();
-
-  timer = setInterval(function () {
-    var delta = Date.now() - start_timer;
-    timer_elem.innerText =
-      Math.floor(delta / 60000) +
-      ":" +
-      ((Math.floor(delta / 1000) % 60) + "").padStart(2, "0") +
-      "." +
-      ((Math.floor(delta / 10) % 100) + "").padStart(2, "0");
-  }, 10);
-
-  updateScore();
-  next();
-}
-
-function reset() {
-  start_butt_elem.innerText = 'Start';
-  end();
-}
-
-function start_or_reset() {
-  if (!started) start()
-  else reset()
-  started = !started;
-}
-
-function updateScore() {
-  score_elem.innerText = score.toString() + "/" + start_places.length * 3;
-}
-
-function end() {
-  // To end this shit
-  header.innerText =
-    "Wynik: " + Math.round((score / (start_places.length * 3)) * 100) + "%";
-  clearInterval(timer);
-  timer = null;
-}
-
-function next() {
-  errors = 0;
-  if (places.length == 0) {
-    end();
-    return;
-  }
-  place = places.pop();
-  console.log(places);
-
-  header.innerText = "Znajdź '" + place.getAttribute("name") + "'";
-}
-
-
-for (var i = 0; i < elements.length; i++) {
-  if (elements[i].tagName != "BUTTON") continue;
-  start_places.push(elements[i]);
-  let x = parseFloat(elements[i].getAttribute("x"));
-  let y = parseFloat(elements[i].getAttribute("y"));
-  if (isNaN(x) || isNaN(y)) {
-    let lon = parseFloat(elements[i].getAttribute("long"));
-    let lat = parseFloat(elements[i].getAttribute("lat"));
-
-    [x, y] = calcXY(lon, lat)
-  }
-  let dx = parseFloat(elements[i].getAttribute("dx"));
-  let dy = parseFloat(elements[i].getAttribute("dy"));
-
-  if (!isNaN(dx)) x += dx;
-  if (!isNaN(dy)) y += dy;
-  elements[i].style.left = x + "%";
-  elements[i].style.top = y + "%";
-  
-  let point_size = parseFloat(elements[i].getAttribute("size"))
-  // console.log(point_size)
-  if (isNaN(point_size)) { point_size = 1.0 }
-
-  let points_scale = parseFloat(points_elem.getAttribute('points-scale'))
-  if (isNaN(points_scale)) { points_scale = 1.0 }
-  // console.log('translate(50%, 50%) scale(%{points_scale*100})')
-
-  elements[i].style.width = point_size + "rem";
-  
-  // let inv = 1/points_scale
-  elements[i].style.transform = 'translate(50%, 50%) scale(' + points_scale*100 + '%)'
-  // console.log(point_size*points_scale + "rem")
-  // elements[i].style.width = "69px"
-  elements[i].addEventListener("mousedown", pointPressed, false);
-}
 
 function calcXY(lon, lat) {
   // Clamp latitude to [-90, 90]
@@ -173,26 +166,48 @@ function calcXY(lon, lat) {
   // Normalize longitude to [-180, 180]
   lon = ((lon + 180) % 360 + 360) % 360 - 180;
 
-  // // scale to image size
-  // lat = (lat-bot_lat)/(top_lat-bot_lat)
-  // lon = (lon-left_long)/(right_long-left_long)
-  if (!isNaN(move_lat)) lat = lat-move_lat
-  if (!isNaN(scale_lat)) lat = lat*scale_lat
-
-  if (!isNaN(move_lon)) lon = lon-move_lon
-  if (!isNaN(scale_lon)) lon = lon*scale_lon
+  lat-config.moveLat
+  lat*config.scaleLat
+  lon-config.moveLon
+  lon*config.scaleLon
   
   // Convert to %
-  const x = (lon + 180) / 360 * 100;   // 0 → 100
-  const y = (90 - lat) / 180 * 100-1;    // 0 (north) → 100 (south)
+  let x = (lon + 180) / 360 * 100;  // 0 → 100
+  let y = (90 - lat) / 180 * 100-1; // 0 (north) → 100 (south)
 
-  // x = 3
-  // x = 94
-  // xPercent = x*(0.94-0.03)+3
-  xPercent = x-1.1
-  // y = 0
-  // y = 74
-  yPercent = y*(0.74-0)-0.5
+  let xPercent = x-1.1
+  let yPercent = y*(0.74-0)-0.5
 
   return [xPercent, yPercent]
 }
+
+
+// -------- INIT BUTTS -------- 
+for (let i = 0; i < elements.length; i++) {
+  if (elements[i].tagName != "BUTTON") continue;
+  startPlaces.push(elements[i]);
+  let x = parseFloat(elements[i].getAttribute("x"));
+  let y = parseFloat(elements[i].getAttribute("y"));
+  if (isNaN(x) || isNaN(y)) {
+    let lon = parseFloat(elements[i].getAttribute("long"));
+    let lat = parseFloat(elements[i].getAttribute("lat"));
+
+    [x, y] = calcXY(lon, lat)
+  }
+  let dx = parseFloat(elements[i].getAttribute("dx")) || 0;
+  let dy = parseFloat(elements[i].getAttribute("dy")) || 0;
+
+  x += dx;
+  y += dy;
+
+  elements[i].style.left = x + "%";
+  elements[i].style.top = y + "%";
+  
+  let point_size = parseFloat(elements[i].getAttribute("size")) || 1
+
+  elements[i].style.width = point_size + "rem";
+  
+  elements[i].style.transform = `translate(50%, 50%) scale(${config.pointsScaleGlobal*100}%)`
+  elements[i].addEventListener("mousedown", pointPressed, false);
+}
+
