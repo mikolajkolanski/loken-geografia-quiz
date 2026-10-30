@@ -6,7 +6,9 @@ const scoreElem = document.getElementById("score");
 const timerElem = document.getElementById("clock");
 const startButtElem = document.getElementById("startButton");
 const pointsElem = document.getElementById("points");
-
+const pointButtons = [...pointsElem.querySelectorAll("button")];
+const polygons = [...document.querySelectorAll("#areas [name]")];
+const allPlaces = pointButtons.concat(polygons);
 
 // -------- CONFIG -------- 
 const config = {
@@ -22,8 +24,7 @@ const audioCorrect = new Audio('assets/correct.mp3');
 const audioWrong = new Audio('assets/error.mp3');
 
 // -------- GAME STATE -------- 
-let startPlaces = [];
-let places;
+let queue = [];
 let place;
 let score;
 let errors;
@@ -40,53 +41,41 @@ function shuffle(array) {
   return array;
 }
 
-function playSound(sound) {
-  sound.currentTime = 0
-  sound.play();
-}
+function playSound(sound) { sound.currentTime = 0; sound.play(); }
 
 
 // -------- GAME -------- 
 function end() {
+  place = null;
   header.innerText =
-    `Wynik: ${Math.round((score / (startPlaces.length * 3)) * 100)}%`;
+    `Wynik: ${Math.round((score / (allPlaces.length * 3)) * 100)}%`;
   clearInterval(timerInterval);
   timerInterval = null;
 }
 
 function nextPlace() {
   errors = 0;
-  if (places.length === 0) {
+  if (queue.length === 0) {
     end();
     return;
   }
-  place = places.pop();
+  place = queue.pop();
 
   header.innerText = `Znajdź '${place.getAttribute("name")}'`;
 }
 
-
-function reset() {
-  startButtElem.innerText = 'Start';
-  end();
-}
-
-
-function updateScore() {
-  scoreElem.innerText = `${score.toString()}/${startPlaces.length * 3}`;
-}
-
+function reset() { startButtElem.innerText = 'Start'; end(); }
+function updateScore() { scoreElem.innerText = `${score.toString()}/${allPlaces.length * 3}`; }
 
 function start() {
   startButtElem.innerText = 'Reset';
 
-  startPlaces.forEach((p) => {
-    p.className = '';
+  queue = shuffle(allPlaces.slice());
+
+  queue.forEach((p) => {
+    p.setAttribute('class', '');
   })
 
-  places = startPlaces.slice();
-  places = shuffle(places)
-  console.log(places);
   score = 0;
   startTimer = new Date();
 
@@ -112,13 +101,39 @@ function start_or_reset() {
 }
 
 
-let pointPressed = function () {
-  let name = this.getAttribute("name");
+function cursorTextPoint(text, correct, x, y) {
+  const elem = document.createElement("div");
+  elem.className = correct ? "cursorText correct" : "cursorText red";
+  elem.textContent = text;
+  document.body.appendChild(elem);
+  
+  const w = elem.offsetWidth;
+  const h = elem.offsetHeight;
+  const sx = window.scrollX;
+  const sy = window.scrollY;
+  const M = 8;
 
+  let left = sx + x + 13;
+  let top  = sy + y - h + 5;
+
+  left = Math.max(sx + M, Math.min(left, sx + window.innerWidth  - w - M));
+  top  = Math.max(sy + M, Math.min(top,  sy + window.innerHeight - h - M));
+
+  elem.style.left = `${left}px`;
+  elem.style.top  = `${top}px`;
+
+  setTimeout(() => elem.remove(), 2000);
+} 
+
+
+let pointPressed = function (btn, event) {
+  let name = btn.getAttribute("name");
+
+  if (!place) return;
   // If incorrect
   if (name !== place.getAttribute("name")) {
     playSound(audioWrong);
-    cursorTextPoint(this, name, false);
+    cursorTextPoint(name, false, event.clientX, event.clientY);
     errors = Math.min(errors+1, 2);
     if (errors > 1) {
       place.classList.add("hint");
@@ -127,36 +142,22 @@ let pointPressed = function () {
   }
 
   // Correct answer
-  cursorTextPoint(this, name, true);
+    cursorTextPoint(name, true, event.clientX, event.clientY);
   playSound(audioCorrect);
 
   if (place.classList.contains("hint")) {
     place.classList.remove("hint");
-    this.classList.add("red");
+    btn.classList.add("red");
   } else if (errors === 1) {
-    this.classList.add("orange");
+    btn.classList.add("orange");
   } else {
-    this.classList.add("correct");
+    btn.classList.add("correct");
   }
   score += 3 - errors;
   updateScore();
   nextPlace();
   return;
 };
-
-
-function cursorTextPoint(point, text, correct) {
-  const p = point.getBoundingClientRect();
-  const elem = document.createElement('div');
-  if (correct) elem.className = 'cursorText correct';
-  else         elem.className = 'cursorText red';
-  elem.textContent = text;
-  elem.style.left = `${p.left+16}px`;
-  elem.style.top = `${p.top}px`;
-  document.body.appendChild(elem);
-
-  setTimeout(() => elem.remove(), 4000);  
-} 
 
 
 function calcXY(lon, lat) {
@@ -185,29 +186,44 @@ function calcXY(lon, lat) {
 // -------- INIT BUTTS -------- 
 for (let i = 0; i < elements.length; i++) {
   if (elements[i].tagName != "BUTTON") continue;
-  startPlaces.push(elements[i]);
-  let x = parseFloat(elements[i].getAttribute("x"));
-  let y = parseFloat(elements[i].getAttribute("y"));
+  const btn = elements[i];
+
+  let x = parseFloat(btn.getAttribute("x"));
+  let y = parseFloat(btn.getAttribute("y"));
   if (isNaN(x) || isNaN(y)) {
-    let lon = parseFloat(elements[i].getAttribute("long"));
-    let lat = parseFloat(elements[i].getAttribute("lat"));
+    let lon = parseFloat(btn.getAttribute("long"));
+    let lat = parseFloat(btn.getAttribute("lat"));
 
     [x, y] = calcXY(lon, lat)
   }
-  let dx = parseFloat(elements[i].getAttribute("dx")) || 0;
-  let dy = parseFloat(elements[i].getAttribute("dy")) || 0;
+  let dx = parseFloat(btn.getAttribute("dx")) || 0;
+  let dy = parseFloat(btn.getAttribute("dy")) || 0;
 
   x += dx;
   y += dy;
 
-  elements[i].style.left = x + "%";
-  elements[i].style.top = y + "%";
+  btn.style.left = x + "%";
+  btn.style.top = y + "%";
   
-  let point_size = parseFloat(elements[i].getAttribute("size")) || 1
+  let point_size = parseFloat(btn.getAttribute("size")) || 1
 
-  elements[i].style.width = point_size + "rem";
+  btn.style.width = point_size + "rem";
   
-  elements[i].style.transform = `translate(50%, 50%) scale(${config.pointsScaleGlobal*100}%)`
-  elements[i].addEventListener("mousedown", pointPressed, false);
+  btn.style.transform = `translate(50%, 50%) scale(${config.pointsScaleGlobal*100}%)`
+  btn.addEventListener("click", (e) => pointPressed(btn, e));
 }
 
+
+function initAreas() {
+  for (const shape of polygons){
+    const pts = shape.getAttribute("points")
+      .trim().split(/\s+/)
+      .map((p) => p.split(",").map(Number))
+      .map(([lat, lon]) => calcXY(lon, lat)) 
+      .map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`)
+      .join(" ");
+    shape.setAttribute("points", pts);
+    shape.addEventListener("click", (e) => pointPressed(shape, e));
+  }
+}
+initAreas();

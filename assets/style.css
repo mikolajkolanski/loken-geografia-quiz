@@ -5,11 +5,7 @@
 *::before {
   font-family: "Poppins", sans-serif;
 }
-body {
-  margin: 0px;
-  padding: 0px;
-  background-color: #ebebe1;
-}
+body { margin: 0px; padding: 0px; background-color: #ebebe1; }
 
 #content {
   display: flex;
@@ -61,9 +57,7 @@ nav {
   display: flex;
   align-items: center;
 }
-#header {
-  font-size: 1.6rem;
-}
+#header { font-size: 1.6rem; }
 
 #points > button {
   position: absolute;
@@ -75,7 +69,6 @@ nav {
   border-color: black;
 
   padding: 0;
-  
 }
 
 #points {
@@ -95,24 +88,6 @@ nav {
   height: auto;
   position: absolute;
 }
-.correct {
-  background-color: #14bb14;
-  pointer-events: none;
-}
-
-.hint {
-  background-color: rebeccapurple;
-}
-
-.orange {
-  background-color: orange;
-  pointer-events: none;
-}
-
-.red {
-  background-color: red;
-  pointer-events: none;
-}
 
 .cursorText {
     position: absolute;
@@ -124,6 +99,18 @@ nav {
     border-radius: 0.3rem;
     padding: 0 0.5rem 0 0.5rem;
 }
+
+
+.cursorText.red { background-color: red; }
+.cursorText.correct { background-color: #14bb14; }
+
+#points button.correct { background-color: #14bb14; }
+#points button.hint { background-color: rebeccapurple; }
+#points button.orange { background-color: orange; }
+#points button.red { background-color: red; }
+
+
+#input { height: 30px; width: 200px; }
 
 @keyframes fadeOut {
     0% {
@@ -139,7 +126,51 @@ nav {
     }
   }
 
-#input {
-  height: 30px;
-  width: 200px;
+
+#areas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+#areas polygon { 
+  fill: transparent; 
+  cursor: pointer; 
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: all; 
 }
+
+#areas polyline { 
+  fill: none; 
+  stroke: transparent; 
+  stroke-width: 5; 
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer; 
+  pointer-events: stroke; 
+  vector-effect: non-scaling-stroke; 
+}
+
+#areas polyline { stroke: #ccc; }
+#areas polygon { fill: #bbb; stroke: #aaa }
+
+#areas polygon.correct { fill: rgba(46,204,113,1); stroke: rgba(46,204,113,1); }
+#areas polygon.orange  { fill: rgba(241,196,15,1); stroke: rgba(241,196,15,1); }
+#areas polygon.red     { fill: rgba(231,76,60,1); stroke: rgba(231,76,60,1); }
+#areas polygon.hint    { fill: rebeccapurple; stroke: rebeccapurple; }
+
+#areas polyline.correct { stroke: rgba(46,204,113,1); }
+#areas polyline.orange { stroke: rgba(241,196,15,1); }
+#areas polyline.red { stroke: rgba(231,76,60,1); }
+#areas polyline.hint    { stroke: rebeccapurple; }
+
+
+/* @media (pointer: coarse) {
+  #areas polyline { stroke-width: 10; }
+  #points button  { min-width: 44px; min-height: 44px; }
+} */
+
+#points button, #areas * {
+  touch-action: manipulation;
+}
+
+.correct, .orange, .red { pointer-events: none; }
+
