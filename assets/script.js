@@ -166,10 +166,10 @@ function calcXY(lon, lat) {
   // Normalize longitude to [-180, 180]
   lon = ((lon + 180) % 360 + 360) % 360 - 180;
 
-  lat-config.moveLat
-  lat*config.scaleLat
-  lon-config.moveLon
-  lon*config.scaleLon
+  lat -= config.moveLat;
+  lat *= config.scaleLat;
+  lon -= config.moveLon;
+  lon *= config.scaleLon;
   
   // Convert to %
   let x = (lon + 180) / 360 * 100;  // 0 → 100
