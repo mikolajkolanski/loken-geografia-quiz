@@ -27,37 +27,29 @@ nav {
   padding-top: 25px;
 }
 
-#startButton {
+#startButton, .scoreCtn, #mistakesButton {
   all: unset;
   background-color: rebeccapurple;
   padding: 4px 10px;
   height: 40px;
-  width: 80px;
   color: white;
   border-radius: 6px;
   text-align: center;
+  align-items: center;
   display: inline-block;
-  cursor: pointer;
   font-weight: 700;
 }
 
-.scoreCtn {
-  background-color: rebeccapurple;
-  padding: 4px 10px;
-  color: white;
-  border-radius: 6px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
-#clock {
-  width: 60px;
-  display: flex;
-  align-items: center;
-}
+#startButton { width: 80px; cursor: pointer; }
+#mistakesButton { width: 100px; cursor: pointer; }
+.scoreCtn, #clock { display: flex; }
 #header { font-size: 1.6rem; }
+
+#mistakesButton:disabled {
+  cursor: default;
+  color: #aaa;
+  background-color: rgb(60, 30, 88);
+}
 
 #points > button {
   position: absolute;

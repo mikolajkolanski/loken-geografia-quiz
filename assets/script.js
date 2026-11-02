@@ -5,6 +5,7 @@ const header = document.getElementById("header");
 const scoreElem = document.getElementById("score");
 const timerElem = document.getElementById("clock");
 const startButtElem = document.getElementById("startButton");
+const mistakesButtElem = document.getElementById("mistakesButton");
 const pointsElem = document.getElementById("points");
 const pointButtons = [...pointsElem.querySelectorAll("button")];
 const polygons = [...document.querySelectorAll("#areas [name]")];
@@ -25,7 +26,10 @@ const audioWrong = new Audio('assets/error.mp3');
 
 // -------- GAME STATE -------- 
 let queue = [];
+let mistakes = [];
 let place;
+let maxPoints = allPlaces.length*3;
+
 let score;
 let errors;
 let timerInterval;
@@ -46,11 +50,18 @@ function playSound(sound) { sound.currentTime = 0; sound.play(); }
 
 // -------- GAME -------- 
 function end() {
+  startButtElem.innerText = 'Start';
+  started = false;
+
   place = null;
   header.innerText =
-    `Wynik: ${Math.round((score / (allPlaces.length * 3)) * 100)}%`;
+    `Wynik: ${Math.round((score / maxPoints) * 100)}%`;
   clearInterval(timerInterval);
   timerInterval = null;
+
+  if (mistakes.length!=0) {
+    if (mistakesButtElem) mistakesButtElem.disabled = false;
+  }
 }
 
 function nextPlace() {
@@ -64,18 +75,24 @@ function nextPlace() {
   header.innerText = `Znajdź '${place.getAttribute("name")}'`;
 }
 
-function reset() { startButtElem.innerText = 'Start'; end(); }
-function updateScore() { scoreElem.innerText = `${score.toString()}/${allPlaces.length * 3}`; }
+function updateScore() { scoreElem.innerText = `${score.toString()}/${maxPoints.toString()}`; }
 
-function start() {
+function start(only_mistakes=false) {
+  started = true;
   startButtElem.innerText = 'Reset';
 
-  queue = shuffle(allPlaces.slice());
+  if (only_mistakes)
+    queue = shuffle(mistakes.slice());
+  else
+    queue = shuffle(allPlaces.slice());
 
-  queue.forEach((p) => {
+  maxPoints = queue.length*3
+  allPlaces.forEach((p) => {
     p.setAttribute('class', '');
   })
 
+  mistakes = []
+  if (mistakesButtElem) mistakesButtElem.disabled = true;
   score = 0;
   startTimer = new Date();
 
@@ -96,8 +113,11 @@ function start() {
 
 function start_or_reset() {
   if (!started) start()
-  else reset()
-  started = !started;
+  else end()
+}
+
+function start_only_mistakes() {
+  start(true);
 }
 
 
@@ -138,16 +158,18 @@ let pointPressed = function (btn, event) {
     if (errors > 1) {
       place.classList.add("hint");
     }
+    
     return;
   }
 
   // Correct answer
-    cursorTextPoint(name, true, event.clientX, event.clientY);
+  cursorTextPoint(name, true, event.clientX, event.clientY);
   playSound(audioCorrect);
 
   if (place.classList.contains("hint")) {
     place.classList.remove("hint");
     btn.classList.add("red");
+    mistakes.push(btn);
   } else if (errors === 1) {
     btn.classList.add("orange");
   } else {
