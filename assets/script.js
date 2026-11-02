@@ -175,7 +175,9 @@ let pointPressed = function (btn, event) {
   } else {
     btn.classList.add("correct");
   }
-  score += 3 - errors;
+  if (errors==0) score+=3
+  if (errors==1) score+=2
+  if (errors==2) score+=0
   updateScore();
   nextPlace();
   return;
